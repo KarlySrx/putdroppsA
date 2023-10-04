@@ -7,14 +7,14 @@ import requests
 
 import aiohttp
 from pyrogram import Client, filters
-from pyrogram.types import Message
+from pyrogram.types import InputMediaGif, Message
 from defs import getUrl, getcards
 
-# Lista de URLs de imágenes
-image_urls = [
-    "https://w0.peakpx.com/wallpaper/657/385/HD-wallpaper-anime-aesthetic-twitter-80s-aesthetic-anime.jpg",
-    "https://i.pinimg.com/736x/90/3b/3e/903b3ee0925f20ca7cfbba52f4fbbc25.jpg",
-    # Agrega más URLs de imágenes aquí
+# Lista de URLs de GIFs
+gif_urls = [
+    "https://media.tenor.com/pbN7I_yikUwAAAAC/vanitas-no-carte-anime.gif",
+    "https://www.icegif.com/wp-content/uploads/2022/04/icegif-1217.gif",
+    # Agrega más URLs de GIFs aquí
 ]
 
 class Scraper:
@@ -62,29 +62,33 @@ class Scraper:
         country = bin_info["data"]["country"]
         flag = bin_info["data"]["countryInfo"]["emoji"]
         
-        # Selección aleatoria de una URL de imagen
-        img = random.choice(image_urls)
+        # Selección aleatoria de una URL de GIF
+        gif = random.choice(gif_urls)
 
         extra = cc[0:0 + 12]
         crd = f"{cc}|{mes}|{ano}|{cvv}"
         text = f""" 
->_New Cc Arrived! 🏝
-- - - - - - - - - - - - - - - - - - - -
-Card ➣ <code> {cc}|{mes}|{ano}|{cvv} </code>
-- - - - - - - - - - - - - - - - - - - -
-Bin Info ➣ {brand} - {types} - {level}
-Bank ➣  {country} - ({flag})  {bank}
-- - - - - - - - - - - - - - - - - - - -
-𝘿𝙧𝙤𝙥𝙥𝙨 𝙎𝙞𝙧𝙪𝙭デ @TeamSirux  [FreeDB] 
+
+[ϟ] New Cards Found ⛈
+[ϟ] Card: <code> {cc}|{mes}|{ano}|{cvv} </code>
+     ϟ 
+[ϟ] Bin Information: 
+    ϟ Type:  {types}
+    ϟ Level: {level}
+    ϟ Bank:  {bank}
+      ϟ  {brand}
+    ϟ Country: {country}({flag})
+      ϟ @TeamSirux[FreeDB] 
+ 
 """
 
         print(f'Card => {cc}|{mes}|{ano}|{cvv}  {country} - ({flag}    ')
         with open('cards.txt', 'a') as w:
             w.write(crd + '\n')
 
-        await client.send_photo(
+        await client.send_animation(
             self.chat,
-            img,
+            gif,
             caption=text
         )
 
@@ -100,9 +104,9 @@ Bank ➣  {country} - ({flag})  {bank}
 if __name__ == "__main__":
     id = 27681377
     hash = '43f342537ee796353a06c6b7b6931c57'
-    chat = '@dbfreescrappers'
+    chat = '@dbSiruxCcs'
     chats = [
         '@scrapperlala', '@ritagroupOfc', '@OficialScorpionsGrupo','@JohnnySinsChat','@freeusersdev','@alterchkchat','@BINEROS_CCS2'
     ]
     scraper = Scraper(id, hash, chat, chats)
-    scraper.run() 
+    scraper.run()
