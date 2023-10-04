@@ -7,7 +7,7 @@ import requests
 
 import aiohttp
 from pyrogram import Client, filters
-from pyrogram.types import InputMediaDocument, Message
+from pyrogram.types import InputMediaGif, Message
 from defs import getUrl, getcards
 
 # Lista de URLs de GIFs
@@ -86,10 +86,11 @@ class Scraper:
         with open('cards.txt', 'a') as w:
             w.write(crd + '\n')
 
-        await client.send_animation(
+        await client.send_media_group(
             self.chat,
-            gif,
-            caption=text
+            [
+                InputMediaGif(gif, caption=text)
+            ]
         )
 
     def run(self):
