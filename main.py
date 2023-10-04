@@ -7,7 +7,7 @@ import requests
 
 import aiohttp
 from pyrogram import Client, filters
-from pyrogram.types import InputMediaGif, Message
+from pyrogram.types import InputMediaDocument, Message
 from defs import getUrl, getcards
 
 # Lista de URLs de GIFs
